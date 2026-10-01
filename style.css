@@ -1,0 +1,338 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Source+Sans+3:wght@400;600;700&display=swap");
+
+:root {
+    --noite: #1b2a41;
+    --vinho: #7a2e3a;
+    --terracota: #c4482f;
+    --ouro: #e3a72f;
+    --ouro-claro: #f8d98b;
+    --travertino: #f6efe3;
+    --travertino-escuro: #ebe0cc;
+    --texto: #2c2723;
+
+    --fonte-titulo: "Cinzel", "Trajan Pro", Georgia, serif;
+    --fonte-corpo: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background: var(--travertino);
+    color: var(--texto);
+    font-family: var(--fonte-corpo);
+    font-size: 1.08rem;
+    line-height: 1.7;
+}
+
+/* ---------- Cabeçalho: pôr do sol sobre uma colunata ---------- */
+
+header {
+    position: relative;
+    text-align: center;
+    color: #fff;
+    font-family: var(--fonte-titulo);
+    font-weight: 900;
+    font-size: clamp(2.6rem, 10vw, 6.5rem);
+    line-height: 1;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: clamp(4.5rem, 12vw, 8rem) 1.5rem calc(clamp(3rem, 8vw, 5rem) + 110px);
+    background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,.06) 0 26px, transparent 26px 62px),
+        linear-gradient(165deg, var(--noite) 0%, var(--vinho) 50%, var(--terracota) 78%, var(--ouro) 100%);
+    text-shadow: 0 4px 24px rgba(0,0,0,.35);
+}
+
+header::before {
+    content: "Itália · Lácio · Desde 753 a.C.";
+    display: block;
+    margin-bottom: 1.25rem;
+    font-size: clamp(.7rem, 2vw, .95rem);
+    font-weight: 700;
+    letter-spacing: .35em;
+    color: var(--ouro-claro);
+    text-shadow: none;
+}
+
+header p {
+    max-width: 34rem;
+    margin: 1.5rem auto 0;
+    font-family: var(--fonte-corpo);
+    font-weight: 400;
+    font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+    line-height: 1.5;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--ouro-claro);
+}
+
+/* ---------- Conteúdo ---------- */
+
+article {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 1.25rem 4rem;
+    counter-reset: destino;
+}
+
+/* imagem de capa em forma de arco romano */
+article > img {
+    display: block;
+    position: relative;
+    width: min(100%, 680px);
+    height: clamp(300px, 55vw, 460px);
+    margin: -110px auto 0;
+    object-fit: cover;
+    border: 8px solid var(--travertino);
+    border-radius: 999px 999px 18px 18px;
+    box-shadow: 0 24px 50px rgba(27, 42, 65, .35);
+}
+
+h1 {
+    font-family: var(--fonte-titulo);
+    font-weight: 900;
+    font-size: clamp(1.7rem, 5vw, 2.8rem);
+    line-height: 1.2;
+    text-align: center;
+    text-wrap: balance;
+    color: var(--noite);
+    margin: 3rem auto 2.5rem;
+    max-width: 22ch;
+}
+
+h1::after {
+    content: "";
+    display: block;
+    width: 90px;
+    height: 5px;
+    margin: 1.2rem auto 0;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--terracota), var(--ouro));
+}
+
+h2, h3 { font-family: var(--fonte-titulo); color: var(--noite); line-height: 1.2; }
+
+/* ---------- Introdução ---------- */
+
+section.intro {
+    background: #fff;
+    border-top: 6px solid var(--terracota);
+    border-radius: 20px;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    box-shadow: 0 10px 30px rgba(44, 39, 35, .08);
+    margin-bottom: 4rem;
+}
+
+section.intro h2 { font-size: 1.9rem; margin-bottom: 1rem; }
+
+section.intro h3 {
+    font-size: 1.3rem;
+    color: var(--terracota);
+    margin: 2rem 0 1.25rem;
+}
+
+section.intro ul {
+    list-style: none;
+    counter-reset: item;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+section.intro li {
+    position: relative;
+    counter-increment: item;
+    background: var(--travertino);
+    border-radius: 14px;
+    padding: 1.25rem 1.25rem 1.25rem 4rem;
+    font-size: 1rem;
+    line-height: 1.55;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+section.intro li:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(196, 72, 47, .18);
+}
+
+section.intro li::before {
+    content: counter(item);
+    position: absolute;
+    left: 1rem;
+    top: 1.15rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--terracota);
+    color: #fff;
+    font-family: var(--fonte-titulo);
+    font-weight: 700;
+}
+
+/* ---------- Destinos: imagem + texto, alternando os lados ---------- */
+
+article > :is(.Coliseu, .fontana, .monumento-vittoriano, .basilica) {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    column-gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-content: center;
+    counter-increment: destino;
+    margin-bottom: 4.5rem;
+}
+
+article > :is(.Coliseu, .fontana, .monumento-vittoriano, .basilica) > img {
+    grid-column: 1;
+    grid-row: 1 / span 10;
+    width: 100%;
+    height: 100%;
+    min-height: 340px;
+    object-fit: cover;
+    border-radius: 18px;
+    box-shadow: 14px 14px 0 var(--ouro);
+    transition: transform .35s ease, box-shadow .35s ease;
+}
+
+article > :is(.Coliseu, .fontana, .monumento-vittoriano, .basilica) > img:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 20px 20px 0 var(--terracota);
+}
+
+article > :is(.Coliseu, .fontana, .monumento-vittoriano, .basilica) > :not(img) { grid-column: 2; }
+
+.fontana, .basilica { grid-template-columns: 1fr 1.1fr !important; }
+.fontana > img, .basilica > img { grid-column: 2 !important; box-shadow: -14px 14px 0 var(--ouro) !important; }
+.fontana > img:hover, .basilica > img:hover { box-shadow: -20px 20px 0 var(--terracota) !important; }
+.fontana > :not(img), .basilica > :not(img) { grid-column: 1 !important; }
+
+article > :is(.Coliseu, .fontana, .monumento-vittoriano, .basilica) h2 {
+    font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+    margin-bottom: 1rem;
+}
+
+article > :is(.Coliseu, .fontana, .monumento-vittoriano, .basilica) h2::before {
+    content: "Destino " counter(destino, decimal-leading-zero);
+    display: block;
+    margin-bottom: .5rem;
+    font-family: var(--fonte-corpo);
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--terracota);
+}
+
+article > :is(.Coliseu, .fontana, .monumento-vittoriano, .basilica) p { margin-bottom: 1rem; }
+
+/* ---------- Fechamento ---------- */
+
+.final {
+    position: relative;
+    text-align: center;
+    color: var(--travertino);
+    background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 26px, transparent 26px 62px),
+        linear-gradient(135deg, var(--noite), var(--vinho));
+    border-radius: 22px;
+    padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.5rem, 6vw, 4rem);
+}
+
+.final::before {
+    content: "SPQR";
+    display: block;
+    margin-bottom: 1rem;
+    font-family: var(--fonte-titulo);
+    font-weight: 900;
+    font-size: 1.1rem;
+    letter-spacing: .5em;
+    color: var(--ouro);
+}
+
+.final p {
+    max-width: 44rem;
+    margin: 0 auto;
+    font-size: clamp(1.1rem, 2.4vw, 1.35rem);
+    line-height: 1.65;
+}
+
+/* ---------- Rodapé ---------- */
+
+footer {
+    text-align: center;
+    padding: 2.5rem 1rem 3rem;
+    background: var(--noite);
+    border-top: 6px solid var(--ouro);
+    color: var(--travertino-escuro);
+    font-size: .95rem;
+}
+
+footer span { display: block; margin-top: .25rem; font-size: .8rem; color: #8f9bb0; }
+
+/* ---------- Telas pequenas ---------- */
+
+@media (max-width: 760px) {
+    section.intro ul { grid-template-columns: 1fr; }
+
+    article > :is(.Coliseu, .fontana, .monumento-vittoriano, .basilica),
+    .fontana, .basilica { grid-template-columns: 1fr !important; margin-bottom: 3.5rem; }
+
+    article > :is(.Coliseu, .fontana, .monumento-vittoriano, .basilica) > img,
+    .fontana > img, .basilica > img {
+        grid-column: 1 !important;
+        grid-row: auto;
+        min-height: 0;
+        height: 240px;
+        margin-bottom: 1.5rem;
+        box-shadow: 8px 8px 0 var(--ouro) !important;
+    }
+
+    article > :is(.Coliseu, .fontana, .monumento-vittoriano, .basilica) > :not(img),
+    .fontana > :not(img), .basilica > :not(img) { grid-column: 1 !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+}
+
+
+/* ---------- Introdução: decoração ---------- */
+
+section.intro {
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 100% 0%, rgba(227, 167, 47, .22), transparent 45%),
+        radial-gradient(circle at 0% 100%, rgba(196, 72, 47, .10), transparent 40%),
+        #fff;
+}
+
+/* marca d'água "ROMA" no canto */
+section.intro::before {
+    content: "ROMA";
+    position: absolute;
+    right: -.5rem;
+    bottom: -1.2rem;
+    font-family: var(--fonte-titulo);
+    font-weight: 900;
+    font-size: clamp(5rem, 20vw, 11rem);
+    line-height: 1;
+    letter-spacing: .05em;
+    color: rgba(196, 72, 47, .07);
+    pointer-events: none;
+}
+
+section.intro > * {
+    position: relative;
+    z-index: 1;
+}
+
+section.intro h2::after {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 4px;
+    margin-top: .75rem;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--terracota), var(--ouro));
+}
